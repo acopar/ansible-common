@@ -1,0 +1,64 @@
+---
+
+- name: Install prerequests for VirtualBox Guest Additions
+  package: name={{ item }} state=present
+  with_items:
+    - dkms
+    - gcc
+    - make
+
+- name: Update kernel
+  package: name={{ item }} state=latest
+  with_items:
+    - kernel
+    - kernel-devel
+  register: common_update_kernel_res
+
+- name: Restart server
+  command: /sbin/shutdown -r +1
+  async: 0
+  poll: 0
+  ignore_errors: yes
+  when: common_update_kernel_res.changed
+
+- name: Waiting for server to come back
+  become: false
+  local_action: wait_for host={{ ansible_ssh_host }} port={{ ansible_ssh_port }} delay=70
+  when: common_update_kernel_res.changed
+
+- name: Download VBoxGuestAdditions.iso
+  get_url:
+    url: http://download.virtualbox.org/virtualbox/5.0.6/VBoxGuestAdditions_5.0.6.iso
+    dest: "{{ common_virtualbox_dist_dir }}/VBoxGuestAdditions_4.3.26.iso"
+  register: common_download_guest_additions_res
+
+- name: Mount VBoxGuestAdditions.iso
+  mount:
+    name: /mnt/dvd
+    src: "{{ common_virtualbox_dist_dir }}/VBoxGuestAdditions_4.3.26.iso"
+    fstype: iso9660
+    opts: ro
+    state: mounted
+  when: common_download_guest_additions_res.changed
+
+- name: Install VirtualBox Guest Additions
+  command: /mnt/dvd/VBoxLinuxAdditions.run
+  register: install_vb_guest_additions_res
+  failed_when: "'Error' in install_vb_guest_additions_res.stderr"
+  when: common_download_guest_additions_res.changed
+
+
+- name: Unmount VBoxGuestAdditions.iso
+  mount:
+    name: /mnt/dvd
+    src: "{{ common_virtualbox_dist_dir }}/VBoxGuestAdditions_4.3.26.iso"
+    fstype: iso9660
+    state: unmounted
+  when: common_download_guest_additions_res.changed
+
+- name: Remove 'Defaults requiretty' from /etc/sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "Defaults.*requiretty"
+    state: absent
+

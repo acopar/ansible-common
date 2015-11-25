@@ -1,0 +1,35 @@
+---
+
+- name: Set root password
+  user:
+    name: root
+    password: "{{ vaulted_common_root_password }}"
+
+- name: Set user's password
+  user:
+    name: "{{ remote_user }}"
+    password: "{{ common_user_password }}"
+  when: vaulted_common_user_password is defined
+
+- name: Disallow password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "PasswordAuthentication"
+    line: "PasswordAuthentication no"
+    state: present
+  notify: Restart ssh
+
+- name: Disallow root login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "PermitRootLogin"
+    line: "PermitRootLogin no"
+    state: present
+  notify: Restart ssh
+
+- name: Ensure firewalld is enabled and started
+  service: name=firewalld enabled=yes state=started
+
+- name: Set SELinux to permisive
+  selinux: state=permisive
+  when: common_selinux_permisive == true

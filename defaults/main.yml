@@ -1,0 +1,13 @@
+---
+
+common_include_security: True
+common_include_guest_additions: false
+
+common_selinux_permisive: false
+
+common_ssh_allowed_ips: []
+common_ssh_authorized_keys: []
+
+vaulted_common_root_password: ""
+
+common_virtualbox_dist_dir: /opt/virtualbox

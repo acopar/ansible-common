@@ -1,0 +1,39 @@
+# {{ ansible_managed }}
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+[ -x /usr/bin/vim ] && alias vi='/usr/bin/vim'
+[ -x /usr/local/bin/vim ] && alias vi='/usr/local/bin/vim'
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+BGREEN='\[\033[1;32m\]'
+GREEN='\[\033[0;32m\]'
+BRED='\[\033[1;31m\]'
+RED='\[\033[0;31m\]'
+BBLUE='\[\033[1;34m\]'
+BLUE='\[\033[0;34m\]'
+NORMAL='\[\033[00m\]'
+{% if common_root_ps1 is defined %}
+PS1="{{ common_root_ps1 }}"
+{% endif %}
+
+# enable specifying a start-up command by setting the START_COMMAND environemnt
+# variable
+# NOTE: Since START_COMMAND is an exported variable, it will be inherited by
+# any children of the shell, and if another Bash shell is one of those
+# children, it'll run the command again. So we assign the value to a new
+# unexported variable (start_command) and delete the old one.
+# For details, see: http://unix.stackexchange.com/a/123192/81172
+if [[ -n "START_COMMAND" ]]; then
+  start_command="$START_COMMAND"
+  unset START_COMMAND
+  eval "$start_command"
+fi

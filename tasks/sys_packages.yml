@@ -1,0 +1,22 @@
+---
+
+- name: Install EPEL repository
+  package: name=epel-release state=present
+
+- name: Install basic system packages
+  package: name={{ item }} state=present
+  with_items:
+   - bash-completion
+   - htop
+   - screen
+   - vim
+   - wget
+
+- name: Install ntp
+  package: name=ntp state=present
+
+- name: Ensure ntp is enabled and started
+  service: name=ntpd enabled=yes state=started
+
+- name: Install firewalld
+  package: name=firewalld state=present

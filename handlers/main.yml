@@ -1,0 +1,7 @@
+---
+
+- name: Reload firewalld
+  service: name=firewalld state=reloaded
+
+- name: Restart ssh
+  service: name=sshd state=restarted

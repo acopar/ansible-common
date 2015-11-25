@@ -1,0 +1,20 @@
+---
+
+- name: Set hostname
+  hostname: name={{ inventory_hostname }}
+
+- name: Set timezone to Europe/Ljubljana
+  command: "timedatectl set-timezone Europe/Ljubljana"
+  register: common_timedate_res
+  changed_when: not common_timedate_res.stdout == ""
+
+- name: Configure root's .bashrc file
+  template:
+    src: home/bashrc_root.j2
+    dest: /root/.bashrc
+
+- name: Configure users's .bashrc file
+  template:
+    src: home/bashrc_user.j2
+    dest: /home/{{ remote_user }}/.bashrc
+    owner: "{{ remote_user }}"

@@ -1,0 +1,22 @@
+---
+
+- name: Get remote username
+  become: false
+  command: whoami
+  changed_when: false
+  register: common_whoami_res
+
+- name: Save remote username to `remote_user`
+  set_fact: remote_user="{{ common_whoami_res.stdout_lines[0] }}"
+
+- include: sys_packages.yml
+
+- include: ssh.yml
+
+- include: security.yml
+  when: common_include_security
+
+- include: config.yml
+
+- include: guest_additions.yml
+  when: common_include_guest_additions
