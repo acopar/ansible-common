@@ -20,3 +20,6 @@
 
 - include: guest_additions.yml
   when: common_include_guest_additions
+
+- include: postfix.yml
+  when: common_include_postfix
