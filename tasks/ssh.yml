@@ -10,7 +10,7 @@
     user: "{{ remote_user }}"
     key: "{{ item }}"
     manage_dir: no
-  with_file: common_ssh_authorized_keys
+  with_file: "{{ common_ssh_authorized_keys }}"
 
 - name: Set authorized_keys file permissions
   file: path=~/.ssh/authorized_keys mode=0600
@@ -27,6 +27,6 @@
     rich_rule: 'rule family="ipv4" source address="{{ item }}/32" service name="ssh" accept'
     state: enabled
     permanent: yes
-  with_items: common_ssh_allowed_ips
+  with_items: "{{ common_ssh_allowed_ips }}"
   when: common_ssh_allowed_ips != []
   notify: Reload firewalld
