@@ -11,6 +11,8 @@
 
 - include: sys_packages.yml
 
+- include: python.yml
+
 - include: ssh.yml
 
 - include: security.yml

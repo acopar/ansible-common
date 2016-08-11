@@ -1,0 +1,16 @@
+---
+
+- name: Install pip
+  package: name=python-devel state=present
+
+- name: Install pip
+  yum: name=python-pip state=present
+
+- name: Update pip
+  pip: name=pip state=latest
+
+- name: Install virtualenv
+  pip: name=virtualenv state=present
+
+- name: Install IPython
+  pip: name=ipython state=latest
