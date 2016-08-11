@@ -2,7 +2,6 @@
 
 common_include_security: True
 common_include_guest_additions: false
-common_include_postfix: true
 
 common_selinux_permisive: false
 
@@ -12,6 +11,3 @@ common_ssh_authorized_keys: []
 vaulted_common_root_password: ""
 
 common_virtualbox_dist_dir: /opt/virtualbox
-
-common_ses_host: email-smtp.eu-west-1.amazonaws.com
-common_ses_port: 25
