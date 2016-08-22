@@ -31,5 +31,5 @@
   service: name=firewalld enabled=yes state=started
 
 - name: Set SELinux to permisive
-  selinux: state=permisive
+  selinux: policy=targeted state=permissive
   when: common_selinux_permisive == true
