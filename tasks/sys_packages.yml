@@ -1,7 +1,31 @@
 ---
+- block:
 
-- name: Install EPEL repository
+  # NOTE: Using 'yum repolist' is an order of magnitude faster than using
+  # 'subscription-manager repos --list-enabled' (~3s vs. ~12s)
+  - name: Check which repositories are enabled
+    command: yum repolist
+    register: common_repos_res
+    changed_when: false
+
+  - name: Enable RHEL repositories that are needed for EPEL
+    command: subscription-manager repos --enable {{ item }}
+    with_items:
+      - rhel-7-server-optional-rpms
+      - rhel-7-server-extras-rpms
+    when: "'\n{{ item }}/' not in common_repos_res.stdout"
+
+  - name: Install EPEL repository package
+    yum:
+      name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+      state: present
+    when: "'\nepel/' not in common_repos_res.stdout"
+
+  when: ansible_distribution == "RedHat"
+
+- name: Install EPEL repository package
   package: name=epel-release state=present
+  when: ansible_distribution == "CentOS"
 
 - name: Install basic system packages
   package: name={{ item }} state=present
