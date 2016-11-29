@@ -6,7 +6,16 @@ Ansible role for common configuration tasks on EL7 servers.
 Requirements
 ------------
 
-No special requirements.
+Currently, the role only supports `CentOS`_ and
+`Red Hat Enterprise Linux (RHEL)`_ EL7 distribution flavors.
+
+If you need support for other flavors, feel free to `submit a pull request`_.
+
+.. _CentOS: https://www.centos.org/
+.. _Red Hat Enterprise Linux (RHEL):
+  https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux
+.. _submit a pull request:
+  https://github.com/dblenkus/ansible-common/pull/new/master
 
 Role Variables
 --------------

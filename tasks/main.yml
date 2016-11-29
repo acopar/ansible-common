@@ -1,5 +1,11 @@
 ---
 
+- name: Check that the system has CentOS 7 or RHEL 7 installed
+  assert:
+    that:
+      - ansible_distribution in ["CentOS", "RedHat"]
+      - ansible_distribution_major_version | int == 7
+
 - name: Get remote username
   become: false
   command: whoami
