@@ -1,6 +1,6 @@
 ---
 
-common_include_security: True
+common_include_security: true
 common_include_guest_additions: false
 
 common_rhel_repos_for_epel:
