@@ -3,6 +3,10 @@
 common_include_security: True
 common_include_guest_additions: false
 
+common_rhel_repos_for_epel:
+  - rhel-7-server-optional-rpms
+  - rhel-7-server-extras-rpms
+
 common_selinux_permisive: false
 
 common_ssh_allowed_ips: []

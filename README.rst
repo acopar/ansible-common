@@ -36,6 +36,10 @@ command as user who connects to the server.
 | ``common_include_postfix``         |  boolean | Specify if part of the role in charge of  |     no    |                true                |
 |                                    |          | installing the Postfix is played or not.  |           |                                    |
 +------------------------------------+----------+-------------------------------------------+-----------+------------------------------------+
+| ``common_rhel_repos_for_epel``     |   list   | List of repository ids that need to be    |     no    | ``- rhel-7-server-optional-rpms``  |
+|                                    |          | enabled on RHEL machines for the `EPEL    |           |                                    |
+|                                    |          | repository`_.                             |           | ``- rhel-7-server-extras-rpms``    |
++------------------------------------+----------+-------------------------------------------+-----------+------------------------------------+
 | ``common_selinux_permisive``       |  boolean | Set SELinux to permisive mode if ``true``.|     no    |                false               |
 +------------------------------------+----------+-------------------------------------------+-----------+------------------------------------+
 | ``common_ssh_allowed_ips``         |   list   | List of ip addresses from which firewall  |     no    |                 []                 |
@@ -87,6 +91,7 @@ command as user who connects to the server.
 +------------------------------------+----------+-------------------------------------------+-----------+------------------------------------+
 
 .. __: http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module
+.. _EPEL repository: https://fedoraproject.org/wiki/EPEL
 
 Dependencies
 ------------
