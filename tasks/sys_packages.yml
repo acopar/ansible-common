@@ -11,13 +11,19 @@
   - name: Enable RHEL repositories that are needed for EPEL
     command: subscription-manager repos --enable {{ item }}
     with_items: "{{ common_rhel_repos_for_epel }}"
-    when: "'\n{{ item }}' not in common_repos_res.stdout"
+    # NOTE: Output of 'yum repolist' may start with '*' if the repository has
+    # metalink data and the latest metadata is not local or with '!' if the
+    # repository has metadata that is expired.
+    when: not common_repos_res.stdout | search('\n(\*|!)?' + item)
 
   - name: Install EPEL repository package
     yum:
       name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
       state: present
-    when: "'\nepel' not in common_repos_res.stdout"
+    # NOTE: Output of 'yum repolist' may start with '*' if the repository has
+    # metalink data and the latest metadata is not local or with '!' if the
+    # repository has metadata that is expired.
+    when: not common_repos_res.stdout | search('\n(\*|!)?' + 'epel')
 
   when: ansible_distribution == "RedHat"
 
