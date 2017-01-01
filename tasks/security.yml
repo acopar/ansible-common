@@ -14,7 +14,7 @@
 - name: Disallow password authentication
   lineinfile:
     dest: /etc/ssh/sshd_config
-    regexp: "PasswordAuthentication"
+    regexp: "^(#\\s*)?PasswordAuthentication\\s+(yes|no)"
     line: "PasswordAuthentication no"
     state: present
   notify: Restart ssh
@@ -22,7 +22,7 @@
 - name: Disallow root login
   lineinfile:
     dest: /etc/ssh/sshd_config
-    regexp: "PermitRootLogin"
+    regexp: "^(#\\s*)?PermitRootLogin\\s+(yes|no)"
     line: "PermitRootLogin no"
     state: present
   notify: Restart ssh
