@@ -1,16 +1,10 @@
 ---
 
-- name: Install pip
-  package: name=python-devel state=present
-
-- name: Install pip
-  yum: name=python-pip state=present
-
-- name: Update pip
-  pip: name=pip state=latest
-
-- name: Install virtualenv
-  pip: name=virtualenv state=present
-
-- name: Install IPython
-  pip: name=ipython state=latest
+- name: Install Python utilities
+  package: name={{ item }} state=present
+  with_items:
+    - python-virtualenv
+    # NOTE: python-ipython-console package provides IPython for running in a
+    # terminal and requires far less dependencies than the python-ipython
+    # package which provides the full IPython.
+    - python-ipython-console
