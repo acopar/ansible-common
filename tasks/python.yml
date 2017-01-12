@@ -8,3 +8,31 @@
     # terminal and requires far less dependencies than the python-ipython
     # package which provides the full IPython.
     - python-ipython-console
+
+- block:
+  - name: Install Python 3.4
+    package: name=python34 state=present
+
+  # NOTE: The following three steps are a work-around to allow creation of
+  # virtual environments with Python 3.4 until this is properly solved
+  # upstream. For more info, see:
+  # - https://bugzilla.redhat.com/show_bug.cgi?id=1263057
+  # - https://bugzilla.redhat.com/show_bug.cgi?id=1319963
+  # - https://bugzilla.redhat.com/show_bug.cgi?id=1411685
+  - name: Install setuptools
+    package: name=python-setuptools state=present
+
+  - name: Get virtualenv version
+    command: virtualenv --version
+    register: common_virtualenv_version_res
+    changed_when: false
+
+  # NOTE: This task installs a new virtualenv in the system-wide location and
+  # replaces the virtualenv executable from the python-virtualenv package.
+  # NOTE: easy_install module lacks proper change detection so we need to
+  # implement it ourselves.
+  - name: Update virtualenv with easy_install
+    easy_install: name=virtualenv state=latest
+    when: common_virtualenv_version_res.stdout | version_compare('15.1', '<')
+
+  when: common_python3_enabled

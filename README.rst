@@ -37,6 +37,8 @@ command as user who connects to the server.
 |                                    |          | enabled on RHEL machines for the `EPEL    |           |                                   |
 |                                    |          | repository`_.                             |           | ``- rhel-7-server-extras-rpms``   |
 +------------------------------------+----------+-------------------------------------------+-----------+-----------------------------------+
+| ``common_python3_enabled``         |  boolean | Install Python 3 if ``true``.             |     no    |             ``false``             |
++------------------------------------+----------+-------------------------------------------+-----------+-----------------------------------+
 | ``common_selinux_permisive``       |  boolean | Set SELinux to permisive mode if ``true``.|     no    |             ``false``             |
 +------------------------------------+----------+-------------------------------------------+-----------+-----------------------------------+
 | ``common_ssh_allowed_ips``         |   list   | List of ip addresses from which firewall  |     no    |              ``[]``               |
