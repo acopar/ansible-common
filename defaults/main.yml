@@ -3,6 +3,8 @@
 common_include_security: true
 common_include_guest_additions: false
 
+common_hostname: "{{ inventory_hostname }}"
+
 common_rhel_repos_for_epel:
   - rhel-7-server-optional-rpms
   - rhel-7-server-extras-rpms

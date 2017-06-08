@@ -33,6 +33,8 @@ command as user who connects to the server.
 |                                    |          | installing the VirtualBox's guest         |           |                                   |
 |                                    |          | additions is played or not.               |           |                                   |
 +------------------------------------+----------+-------------------------------------------+-----------+-----------------------------------+
+| ``common_hostname``                |  string  | Hostname of the server.                   |     no    | ``"{{ inventory_hostname }}"``    |
++------------------------------------+----------+-------------------------------------------+-----------+-----------------------------------+
 | ``common_rhel_repos_for_epel``     |   list   | List of repository ids that need to be    |     no    | ``- rhel-7-server-optional-rpms`` |
 |                                    |          | enabled on RHEL machines for the `EPEL    |           |                                   |
 |                                    |          | repository`_.                             |           | ``- rhel-7-server-extras-rpms``   |

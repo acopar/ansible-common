@@ -1,7 +1,7 @@
 ---
 
 - name: Set hostname
-  hostname: name={{ inventory_hostname }}
+  hostname: name={{ common_hostname }}
 
 - name: Set timezone to Europe/Ljubljana
   command: "timedatectl set-timezone Europe/Ljubljana"
