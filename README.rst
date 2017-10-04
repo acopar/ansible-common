@@ -9,6 +9,11 @@ Requirements
 Currently, the role only supports `CentOS`_ and
 `Red Hat Enterprise Linux (RHEL)`_ EL7 distribution flavors.
 
+It also requires RHEL/CentOS 7.4 or higher since it provides a newer
+python-virtualenv package (1.10.1-4.el7+) which fixes compatibility with
+Python 3 (for more details,
+see: https://bugzilla.redhat.com/show_bug.cgi?id=1411685).
+
 If you need support for other flavors, feel free to `submit a pull request`_.
 
 .. _CentOS: https://www.centos.org/
