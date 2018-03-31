@@ -21,6 +21,6 @@ RED='\[\033[0;31m\]'
 BBLUE='\[\033[1;34m\]'
 BLUE='\[\033[0;34m\]'
 NORMAL='\[\033[00m\]'
-{% if common_root_ps1 is defined %}
-PS1="{{ common_root_ps1 }}"
+{% if item.ps1 is defined %}
+PS1="{{ item.ps1 }}"
 {% endif %}
