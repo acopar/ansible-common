@@ -10,6 +10,7 @@ common_rhel_repos_for_epel:
   - rhel-7-server-extras-rpms
 
 common_python3_enabled: false
+common_python36_enabled: false
 
 common_selinux_permisive: false
 

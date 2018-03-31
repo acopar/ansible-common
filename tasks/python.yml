@@ -12,3 +12,7 @@
 - name: Install Python 3.4
   package: name=python34 state=present
   when: common_python3_enabled
+
+- name: Install Python 3.6
+  package: name=python36 state=present
+  when: common_python36_enabled
