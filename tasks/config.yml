@@ -16,3 +16,12 @@
   with_items:
     - { dest: "/root", owner: "root",  ps1: "{{ common_root_ps1 }}" }
     - { dest: "/home/{{ remote_user }}", owner: "{{ remote_user }}", ps1: "{{ common_user_ps1 }}" }
+
+- name: Configure .vimrc files
+  template:
+    src: home/vimrc.j2
+    dest: "{{ item.dest }}/.vimrc"
+    owner: "{{ item.owner }}"
+  with_items:
+    - { dest: "/root", owner: "root" }
+    - { dest: "/home/{{ remote_user }}", owner: "{{ remote_user }}" }
