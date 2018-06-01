@@ -19,4 +19,7 @@ common_ssh_authorized_keys: []
 
 vaulted_common_root_password: ""
 
+common_root_ps1: '${BGREEN}\u@\h${NORMAL}:${BBLUE}\w${NORMAL}\\$ '
+common_user_ps1: '${BLUE}(${RED}\w${BLUE}) ${NORMAL}\h ${RED}\\$ ${NORMAL}'
+
 common_virtualbox_dist_dir: /opt/virtualbox
