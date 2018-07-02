@@ -5,3 +5,6 @@
 
 - name: Restart ssh
   service: name=sshd state=restarted
+
+- name: Restart systemd-journald
+  service: name=systemd-journald state=restarted
