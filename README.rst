@@ -102,7 +102,7 @@ To use this role add this to your playbook:
 
     - hosts: servers
       roles:
-         - { role: domenblenkus.common }
+         - { role: genialis.common }
 
 License
 -------
