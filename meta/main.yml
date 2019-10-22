@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: common
   author: Domen Blenkuš
   description: Common configutation for CentOS 7 server.
   license: GPLv3
