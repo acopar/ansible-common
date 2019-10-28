@@ -15,16 +15,16 @@
 - name: Save remote username to `remote_user`
   set_fact: remote_user="{{ common_whoami_res.stdout_lines[0] }}"
 
-- include: sys_packages.yml
+- include_tasks: sys_packages.yml
 
-- include: python.yml
+- include_tasks: python.yml
 
-- include: ssh.yml
+- include_tasks: ssh.yml
 
-- include: security.yml
+- include_tasks: security.yml
   when: common_include_security
 
-- include: config.yml
+- include_tasks: config.yml
 
-- include: guest_additions.yml
+- include_tasks: guest_additions.yml
   when: common_include_guest_additions
