@@ -4,7 +4,7 @@
   assert:
     that:
       - ansible_distribution in ["CentOS", "RedHat"]
-      - ansible_distribution_version | version_compare('7.4', '>=')
+      - ansible_distribution_version is version_compare('7.4', '>=')
 
 - name: Get remote username
   become: false

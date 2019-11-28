@@ -14,7 +14,7 @@
     # NOTE: Output of 'yum repolist' may start with '*' if the repository has
     # metalink data and the latest metadata is not local or with '!' if the
     # repository has metadata that is expired.
-    when: not common_repos_res.stdout | search('\n(\*|!)?' + item)
+    when: not common_repos_res.stdout is search('\n(\*|!)?' + item)
 
   - name: Install EPEL repository package
     yum:
@@ -23,7 +23,7 @@
     # NOTE: Output of 'yum repolist' may start with '*' if the repository has
     # metalink data and the latest metadata is not local or with '!' if the
     # repository has metadata that is expired.
-    when: not common_repos_res.stdout | search('\n(\*|!)?' + 'epel')
+    when: not common_repos_res.stdout is search('\n(\*|!)?' + 'epel')
 
   when: ansible_distribution == "RedHat"
 
