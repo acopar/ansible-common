@@ -1,13 +1,14 @@
 ---
 
 - name: Install Python utilities
-  package: name={{ item }} state=present
-  with_items:
-    - python-virtualenv
-    # NOTE: python-ipython-console package provides IPython for running in a
-    # terminal and requires far less dependencies than the python-ipython
-    # package which provides the full IPython.
-    - python-ipython-console
+  package:
+    name:
+      - python-virtualenv
+      # NOTE: python-ipython-console package provides IPython for running in a
+      # terminal and requires far less dependencies than the python-ipython
+      # package which provides the full IPython.
+      - python-ipython-console
+    state: present
 
 - name: Install Python 3.4
   package: name=python34 state=present

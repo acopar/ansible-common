@@ -1,17 +1,19 @@
 ---
 
 - name: Install prerequests for VirtualBox Guest Additions
-  package: name={{ item }} state=present
-  with_items:
-    - dkms
-    - gcc
-    - make
+  package:
+    name:
+      - dkms
+      - gcc
+      - make
+    state: present
 
 - name: Update kernel
-  package: name={{ item }} state=latest
-  with_items:
-    - kernel
-    - kernel-devel
+  package:
+    name:
+      - kernel
+      - kernel-devel
+    state: latest
   register: common_update_kernel_res
 
 - name: Restart server
