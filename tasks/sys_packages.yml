@@ -39,10 +39,8 @@
       - screen
       - vim
       - wget
+      - ntp
     state: present
-
-- name: Install ntp
-  package: name=ntp state=present
 
 - name: Ensure ntp is enabled and started
   service: name=ntpd enabled=yes state=started
