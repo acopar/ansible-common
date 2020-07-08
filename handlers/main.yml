@@ -8,3 +8,6 @@
 
 - name: Restart systemd-journald
   service: name=systemd-journald state=restarted
+
+- name: Restart auditd
+  service: name=auditd state=restarted use=service

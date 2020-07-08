@@ -61,6 +61,12 @@ command as user who connects to the server.
 |                                    |          | added to ``remote_user``'s                |           |                                                                |
 |                                    |          | ``authorized_keys file``.                 |           |                                                                |
 +------------------------------------+----------+-------------------------------------------+-----------+----------------------------------------------------------------+
+| ``common_audit_num_logs``          |   int    | Number of log files that auditd will      |     no    | ``100``                                                        |
+|                                    |          | keep before they are removed.             |           |                                                                |
++------------------------------------+----------+-------------------------------------------+-----------+----------------------------------------------------------------+
+| ``common_audit_max_log_file``      |   int    | Maximum file size of each auditd          |     no    | ``20``                                                         |
+|                                    |          | log file.                                 |           |                                                                |
++------------------------------------+----------+-------------------------------------------+-----------+----------------------------------------------------------------+
 | ``vaulted_common_root_password``   |  string  | ``root``'s password. It must be hashed    |     no    | ``""``                                                         |
 |                                    |          | and stored in Ansible Vault for security  |           |                                                                |
 |                                    |          | reasons. See `Ansible documentation`_ for |           |                                                                |

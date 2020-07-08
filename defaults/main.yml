@@ -17,6 +17,9 @@ common_selinux_permisive: false
 common_ssh_allowed_ips: []
 common_ssh_authorized_keys: []
 
+common_audit_num_logs: 100
+common_audit_max_log_file: 20
+
 vaulted_common_root_password: ""
 
 common_root_ps1: '${BGREEN}\u@\h${NORMAL}:${BBLUE}\w${NORMAL}\\$ '

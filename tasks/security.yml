@@ -89,3 +89,19 @@
 - name: Set SELinux to permisive
   selinux: policy=targeted state=permissive
   when: common_selinux_permisive == true
+
+- name: Set the number of audit log files
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    regexp: "^num_logs\\s*=\\s*\\d+"
+    line: "num_logs = {{ common_audit_num_logs }}"
+    state: present
+  notify: Restart auditd
+
+- name: Configure audit log storage size
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    regexp: "^max_log_file\\s*=\\s*\\d+"
+    line: "max_log_file = {{ common_audit_max_log_file }}"
+    state: present
+  notify: Restart auditd
