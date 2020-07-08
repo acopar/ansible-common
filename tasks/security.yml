@@ -27,6 +27,62 @@
     state: present
   notify: Restart ssh
 
+- name: Disable SSH X11 forwarding
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#?X11Forwarding\\s+(yes|no)"
+    line: "X11Forwarding no"
+    state: present
+  notify: Restart ssh
+
+- name: Ensure SSH MaxAuthTries is set to 4 or less
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^(#\\s*)?MaxAuthTries\\s+\\d+"
+    line: "MaxAuthTries 4"
+    state: present
+  notify: Restart ssh
+
+- name: Configure SSH idle timeout
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^(#\\s*)?ClientAliveInterval\\s+\\d+"
+    line: "ClientAliveInterval 300"
+    state: present
+  notify: Restart ssh
+
+- name: Configure SSH idle timeout alive count
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^(#\\s*)?ClientAliveCountMax\\s+\\d+"
+    line: "ClientAliveCountMax 2"
+    state: present
+  notify: Restart ssh
+
+- name: Disable SSH TCPKeepAlive
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#?TCPKeepAlive\\s+(yes|no)"
+    line: "TCPKeepAlive no"
+    state: present
+  notify: Restart ssh
+
+- name: Configure SSH LoginGraceTime
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^(#\\s*)?LoginGraceTime\\s+\\d+\\w?"
+    line: "LoginGraceTime 60"
+    state: present
+  notify: Restart ssh
+
+- name: Disable SSH TCP forwarding
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^#?AllowTcpForwarding\\s+(yes|no)"
+    line: "AllowTcpForwarding no"
+    state: present
+  notify: Restart ssh
+
 - name: Ensure firewalld is enabled and started
   service: name=firewalld enabled=yes state=started
 
