@@ -14,6 +14,14 @@
     dest: /etc/systemd/journald.conf
   notify: Restart systemd-journald
 
+- name: Configure systemd memory accounting
+  lineinfile:
+    dest: /etc/systemd/system.conf
+    regexp: "^(#\\s*)?DefaultMemoryAccounting=(yes|no)"
+    line: "DefaultMemoryAccounting=yes"
+    state: present
+  notify: Re-exec systemd
+
 - name: Configure .bashrc files
   template:
     src: home/bashrc.j2
