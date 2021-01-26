@@ -3,7 +3,7 @@
 - name: Set root password
   user:
     name: root
-    password: "{{ vaulted_common_root_password }}"
+    password_lock: True
 
 - name: Set user's password
   user:

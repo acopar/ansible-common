@@ -67,15 +67,6 @@ command as user who connects to the server.
 | ``common_audit_max_log_file``      |   int    | Maximum file size of each auditd          |     no    | ``20``                                                         |
 |                                    |          | log file.                                 |           |                                                                |
 +------------------------------------+----------+-------------------------------------------+-----------+----------------------------------------------------------------+
-| ``vaulted_common_root_password``   |  string  | ``root``'s password. It must be hashed    |     no    | ``""``                                                         |
-|                                    |          | and stored in Ansible Vault for security  |           |                                                                |
-|                                    |          | reasons. See `Ansible documentation`_ for |           |                                                                |
-|                                    |          | more details.                             |           |                                                                |
-|                                    |          |                                           |           |                                                                |
-|                                    |          | .. WARNING::                              |           |                                                                |
-|                                    |          |    Password will be disabled if this      |           |                                                                |
-|                                    |          |    setting is left blank.                 |           |                                                                |
-+------------------------------------+----------+-------------------------------------------+-----------+----------------------------------------------------------------+
 | ``vaulted_common_user_password``   |  string  | ``remote_user``'s password. It must be    |     no    |                                                                |
 |                                    |          | hashed and stored in Ansible Vault for    |           |                                                                |
 |                                    |          | security reasons. See `Ansible            |           |                                                                |
