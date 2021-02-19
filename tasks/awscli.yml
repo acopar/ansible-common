@@ -1,0 +1,60 @@
+---
+- name: Check preexisting AWS install
+  stat:
+    path: /usr/local/bin/aws
+  register: register_aws_path
+
+- name:
+  set_fact:
+    aws_needs_update: false
+
+- name: Detect if AWS CLI needs install
+  block:
+  - name: Check current version
+    command: >
+      /usr/local/bin/aws --version
+    register: register_aws_version_full
+
+  - name: Parse AWS version
+    set_fact:
+      aws_version: "{{ register_aws_version_full.stdout.split(' ')[0].split('/')[1] }}"
+
+  - name:
+    set_fact:
+      aws_needs_update: true
+    when: common_aws_cli_version != aws_version
+
+  when: register_aws_path.stat.exists
+
+- block:
+  - name: Download AWS CLI
+    get_url:
+      url: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ common_aws_cli_version }}.zip"
+      dest: /tmp/awscliv2.zip
+
+  - name: Extract and install AWS CLI
+    unarchive:
+      src: /tmp/awscliv2.zip
+      dest: /tmp/
+      remote_src: yes
+
+  - name: Install AWS CLI
+    command: >
+      /tmp/aws/install
+    when: aws_needs_update == false
+
+  - name: Update AWS CLI
+    command: >
+      /tmp/aws/install --update
+    when: aws_needs_update
+
+  - name: Cleanup AWS install files
+    file:
+      state: absent
+      path: "{{ item }}"
+    with_items:
+      - /tmp/awscliv2.zip
+      - /tmp/aws/
+
+  when: register_aws_path.stat.exists == false or aws_needs_update
+

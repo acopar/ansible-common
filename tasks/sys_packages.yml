@@ -40,6 +40,7 @@
       - vim
       - wget
       - ntp
+      - unzip
     state: present
 
 - name: Ensure ntp is enabled and started

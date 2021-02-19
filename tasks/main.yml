@@ -24,6 +24,9 @@
 - include_tasks: security.yml
   when: common_include_security
 
+- include_tasks: awscli.yml
+  tags: common_awscli
+
 - include_tasks: config.yml
 
 - include_tasks: guest_additions.yml
