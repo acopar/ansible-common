@@ -20,7 +20,6 @@
     regexp: "^(#\\s*)?DefaultMemoryAccounting=(yes|no)"
     line: "DefaultMemoryAccounting=yes"
     state: present
-  notify: Re-exec systemd
 
 - name: Configure .bashrc files
   template:

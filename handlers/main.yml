@@ -12,6 +12,3 @@
 - name: Restart auditd
   service: name=auditd state=restarted use=service
 
-- name: Re-exec systemd
-  systemd:
-    daemon_reexec: yes
